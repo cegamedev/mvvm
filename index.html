@@ -8,8 +8,12 @@
   </head>
   <body>
     <h1>需要启用chrome支持es6语法功能</h1>
-    <div id="app"></div>
-    <div class="dd"> {{a}} <span></span> </div>
+    <div id="app" style="padding: 35px;">
+      <div>测试1：{{msgName}} -- {{msgContent}}</div>
+      <div style="margin-top: 30px;color:red;">测试2：{{msgObj.name}} -- {{msgObj.content}}</div>
+      <div style="margin-top: 30px;"><input class="input1" value="" placeholder="hello" /></div>
+      <div style="margin-top: 30px;"><input class="input2" value="" placeholder="word" /></div>
+    </div>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

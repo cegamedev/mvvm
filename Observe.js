@@ -1,3 +1,5 @@
+import Bridge from './Bridge.js';
+
 /**
  * 封装Observe，用来拦截对象的get和set方法，发布订阅
  * get方法中放入订阅者 ，set方法中执行订阅者方法
@@ -20,16 +22,20 @@ class Observe {
     const keys = Object.keys(obj);
     for(let i=0; i<keys.length; i+=1) {
       const _key = keys[i];
-      const _val = obj[_key];
+      let _val = obj[_key];
       Object.defineProperty(obj,_key,{
         configurable: true,
         get() {
+          if(Bridge.target){
+            Bridge.addWatcher(Bridge.target);
+          }
           return _val;
         },
-        set(val) {
-          if (val !== _val) {
-            obj[_key] = val;
+        set: (val) => {
+          if (_val !== val) {
+            _val = val;
             this.editProperty(val);
+            Bridge.notify();
           }
         }
       });

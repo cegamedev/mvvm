@@ -10,11 +10,24 @@ const mvvm = new Mvvm({
       msgName: 'hello',
       msgContent: 'word',
       msgObj: {
-        name: 'hello',
-        content: 'word'
+        name: 'hello2',
+        content: 'word2'
       }
     }
   },
 });
 
-console.log(mvvm);
+const input1 = document.querySelector('.input1');
+const input2 = document.querySelector('.input2');
+
+input1.addEventListener('input', e => {
+  const newVal = e.target.value;
+  mvvm.$data.msgName = newVal;
+  mvvm.$data.msgObj.name = newVal;
+});
+
+input2.addEventListener('input', e => {
+  const newVal = e.target.value;
+  mvvm.$data.msgContent = newVal;
+  mvvm.$data.msgObj.content = newVal;
+});

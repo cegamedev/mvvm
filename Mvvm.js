@@ -1,4 +1,5 @@
 import Observe from './Observe.js';
+import Compile from './Compile.js';
 /**
  * 封装Mvvm框架
  */
@@ -16,6 +17,7 @@ class Mvvm {
     }
     this.$el = el;
     this.$data = new Observe(data());
+    new Compile(this.$el, this.$data);
   }
 
 }
