@@ -15,9 +15,8 @@ class Watcher {
     // todo 为模板中{{}}片段添加watcher
     this.$txt.replace(this.$reg,(p1,p2)=>{
       let keyArr = p2.split('.');
-      return this._search(this.$data,keyArr) || '';
+      return this._getActionAddWatcher(this.$data,keyArr) || '';
     });
-    Bridge.target = null;
   }
 
   update() {
@@ -28,17 +27,30 @@ class Watcher {
     this.$callFn(this.$node,this.$newTxt);
   }
 
-  _search(obj,arr) {
+  _getActionAddWatcher(obj,arr) {
     const key = arr[0];
     if(arr.length <= 1) {
       // todo 只给用到的子属性添加watcher
       Bridge.target = this;
+      const val = obj[key];
+      Bridge.target = null;
+      return val;
+    }
+    else {
+      return this._getActionAddWatcher(obj[key],arr.slice(1));
+    }
+  }
+
+  _search(obj,arr) {
+    const key = arr[0];
+    if(arr.length <= 1) {
       return obj[key];
     }
     else {
       return this._search(obj[key],arr.slice(1));
     }
   }
+
 }
 
 
