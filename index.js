@@ -31,3 +31,6 @@ input2.addEventListener('input', e => {
   mvvm.$data.msgContent = newVal;
   mvvm.$data.msgObj.content = newVal;
 });
+
+let node = document.querySelector('.test')
+console.log(node.childNodes)
